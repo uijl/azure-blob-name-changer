@@ -1,8 +1,22 @@
 import io
+from pathlib import Path
 from typing import Optional, List
 from azure.storage.blob import ContainerClient
 
 
+
+def file_name_change(file: Path) -> Path:
+    """"""
+
+    for file in Path.cwd().iterdir():
+        if not file.suffix == ".csv":
+            continue
+        else:
+            directory = file.parent
+            extension = file.suffix
+            new_name = f"{file.stem}{extension}"
+
+            file.rename(Path(directory, new_name))
 
 
 def list_blobs(container_client: ContainerClient, name_starts_with: Optional[str] = None) -> List[str]:
